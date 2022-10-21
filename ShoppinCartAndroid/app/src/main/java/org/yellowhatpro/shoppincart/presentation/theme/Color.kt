@@ -1,4 +1,4 @@
-package org.yellowhatpro.shoppincart.ui.theme
+package org.yellowhatpro.shoppincart.presentation.theme
 
 import androidx.compose.ui.graphics.Color
 
