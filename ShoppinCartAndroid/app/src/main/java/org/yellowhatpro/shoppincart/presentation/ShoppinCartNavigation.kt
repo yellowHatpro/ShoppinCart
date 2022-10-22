@@ -24,7 +24,8 @@ fun ShoppinCartNavigation(
             viewModel)
         }
         composable(route = NavigationItem.Profile.route){
-            ProfileScreen()
+            ProfileScreen(modifier,
+            viewModel)
         }
     }
 }

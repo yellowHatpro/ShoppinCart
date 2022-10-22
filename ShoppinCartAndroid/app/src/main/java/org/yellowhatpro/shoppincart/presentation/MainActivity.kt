@@ -12,6 +12,7 @@ import androidx.navigation.compose.rememberNavController
 import dagger.hilt.android.AndroidEntryPoint
 import org.yellowhatpro.shoppincart.presentation.ui.components.BottomBar
 import org.yellowhatpro.shoppincart.presentation.theme.ShoppinCartTheme
+import org.yellowhatpro.shoppincart.presentation.ui.components.TopAppBar
 
 @OptIn(ExperimentalMaterial3Api::class)
 @AndroidEntryPoint
@@ -23,6 +24,10 @@ class MainActivity : ComponentActivity() {
             val viewModel = hiltViewModel<ShoppinCartViewModel>()
             ShoppinCartTheme {
                 Scaffold(
+                    topBar = {
+                        TopAppBar()
+                    }
+                    ,
                     bottomBar = {
                         BottomBar(navController = navController)
                     }
