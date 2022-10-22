@@ -25,9 +25,8 @@ class MainActivity : ComponentActivity() {
             ShoppinCartTheme {
                 Scaffold(
                     topBar = {
-                        TopAppBar()
-                    }
-                    ,
+                        TopAppBar(navController)
+                    },
                     bottomBar = {
                         BottomBar(navController = navController)
                     }

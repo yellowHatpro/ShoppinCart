@@ -6,6 +6,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import org.yellowhatpro.shoppincart.presentation.ui.components.NavigationItem
+import org.yellowhatpro.shoppincart.presentation.ui.features.cart.CartScreen
 import org.yellowhatpro.shoppincart.presentation.ui.features.home.HomeScreen
 import org.yellowhatpro.shoppincart.presentation.ui.features.profile.ProfileScreen
 
@@ -18,14 +19,21 @@ fun ShoppinCartNavigation(
     NavHost(
         navController = navHostController,
         startDestination = NavigationItem.Home.route
-        ){
-        composable(route = NavigationItem.Home.route){
-            HomeScreen(modifier,
-            viewModel)
+    ) {
+        composable(route = NavigationItem.Home.route) {
+            HomeScreen(
+                modifier,
+                viewModel
+            )
         }
-        composable(route = NavigationItem.Profile.route){
-            ProfileScreen(modifier,
-            viewModel)
+        composable(route = NavigationItem.Profile.route) {
+            ProfileScreen(
+                modifier,
+                viewModel
+            )
+        }
+        composable(route = NavigationItem.Cart.route){
+            CartScreen(modifier)
         }
     }
 }

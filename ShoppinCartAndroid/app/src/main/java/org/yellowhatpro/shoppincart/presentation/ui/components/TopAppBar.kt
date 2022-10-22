@@ -1,5 +1,6 @@
 package org.yellowhatpro.shoppincart.presentation.ui.components
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.ShoppingCart
@@ -11,20 +12,29 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TopAppBar(){
+fun TopAppBar(
+    navHostController: NavHostController
+) {
     TopAppBar(
         title = {
-            Text(text = "SHOPPIN CART",
-            modifier = Modifier.padding(10.dp),
-            fontSize = 18.sp)
+            Text(
+                text = "SHOPPIN CART",
+                modifier = Modifier.padding(10.dp),
+                fontSize = 18.sp
+            )
         },
         actions = {
             Icon(imageVector = Icons.Rounded.ShoppingCart,
                 contentDescription = "",
-                modifier = Modifier.padding(10.dp))
+                modifier = Modifier
+                    .padding(10.dp)
+                    .clickable {
+                        navHostController.navigate(NavigationItem.Cart.route)
+                    })
         }
     )
 }
