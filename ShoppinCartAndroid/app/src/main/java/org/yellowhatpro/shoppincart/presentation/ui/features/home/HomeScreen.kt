@@ -89,7 +89,7 @@ fun HomeScreen(
                             ProductItem(
                                 image = it?.images?.get(0) ?: "",
                                 name = it?.title ?: "",
-                                cost = it?.price.toString()
+                                cost = it?.price
                             )
                         }
                     }
@@ -103,7 +103,7 @@ fun HomeScreen(
 fun ProductItem(
     image: String,
     name: String,
-    cost: String
+    cost: Int?
 ) {
     Box(
         modifier = Modifier
@@ -134,7 +134,7 @@ fun ProductItem(
                 style = LocalTextStyle.current.copy(lineHeight = 15.sp)
             )
             Text(
-                text = "Rs. $cost",
+                text = "Rs. ${(cost ?: 0)*80}",
                 fontSize = 12.sp
             )
         }
