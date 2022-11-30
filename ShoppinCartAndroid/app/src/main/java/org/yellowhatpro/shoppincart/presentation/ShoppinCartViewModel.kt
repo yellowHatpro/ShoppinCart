@@ -21,8 +21,9 @@ class ShoppinCartViewModel @Inject constructor(
         for (category in categories){
             getProductBasedOnCategory(category.endpoint)
         }
+        getAllProducts()
     }
-
+    private val _selectedProduct : MutableStateFlow<Product?> = MutableStateFlow(Product())
     private val _allProducts: MutableStateFlow<List<Product?>> = MutableStateFlow(listOf(Product()))
     private val _smartphones: MutableStateFlow<List<Product?>> = MutableStateFlow(listOf(Product()))
     private val _laptops: MutableStateFlow<List<Product?>> = MutableStateFlow(listOf(Product()))
@@ -44,6 +45,7 @@ class ShoppinCartViewModel @Inject constructor(
     private val _automotives: MutableStateFlow<List<Product?>> = MutableStateFlow(listOf(Product()))
     private val _motorcycle: MutableStateFlow<List<Product?>> = MutableStateFlow(listOf(Product()))
     private val _lighting: MutableStateFlow<List<Product?>> = MutableStateFlow(listOf(Product()))
+    val selectedProduct : MutableStateFlow<Product?> = MutableStateFlow(Product())
     val allProducts = _allProducts.asStateFlow()
     val smartphones = _smartphones.asStateFlow()
     val laptop = _laptops.asStateFlow()

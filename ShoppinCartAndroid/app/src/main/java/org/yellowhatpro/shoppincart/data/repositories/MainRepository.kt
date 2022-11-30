@@ -1,5 +1,6 @@
 package org.yellowhatpro.shoppincart.data.repositories
 
+import org.yellowhatpro.shoppincart.data.entities.Product
 import org.yellowhatpro.shoppincart.data.entities.Products
 import retrofit2.Response
 

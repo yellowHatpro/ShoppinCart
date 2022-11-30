@@ -26,15 +26,18 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import org.yellowhatpro.shoppincart.data.entities.Category.*
 import org.yellowhatpro.shoppincart.data.entities.categories
 import org.yellowhatpro.shoppincart.presentation.ShoppinCartViewModel
+import org.yellowhatpro.shoppincart.presentation.ui.components.NavigationItem
 
 @Composable
 fun HomeScreen(
     modifier : Modifier,
-    viewModel : ShoppinCartViewModel
+    viewModel : ShoppinCartViewModel,
+    navHostController: NavHostController
 ) {
     Surface(modifier = modifier.fillMaxSize()) {
         val smartphones by viewModel.smartphones.collectAsState()
@@ -87,9 +90,11 @@ fun HomeScreen(
                             }
                         ) {
                             ProductItem(
+                                id = it?.id ?: 0 ,
                                 image = it?.images?.get(0) ?: "",
                                 name = it?.title ?: "",
-                                cost = it?.price
+                                cost = it?.price,
+                                navHostController = navHostController
                             )
                         }
                     }
@@ -101,9 +106,11 @@ fun HomeScreen(
 
 @Composable
 fun ProductItem(
+    id : Int,
     image: String,
     name: String,
-    cost: Int?
+    cost: Int?,
+    navHostController: NavHostController
 ) {
     Box(
         modifier = Modifier
@@ -111,7 +118,9 @@ fun ProductItem(
             .height(220.dp)
             .width(140.dp)
             .clip(RoundedCornerShape(10.dp))
-            .clickable { },
+            .clickable {
+                       navHostController.navigate(NavigationItem.Home.route+"/"+id)
+            },
     ) {
         Column(
             modifier = Modifier

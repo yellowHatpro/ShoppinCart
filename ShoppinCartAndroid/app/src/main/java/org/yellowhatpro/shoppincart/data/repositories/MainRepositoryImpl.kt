@@ -1,5 +1,6 @@
 package org.yellowhatpro.shoppincart.data.repositories
 
+import org.yellowhatpro.shoppincart.data.entities.Product
 import org.yellowhatpro.shoppincart.data.entities.Products
 import org.yellowhatpro.shoppincart.data.network.Api
 import retrofit2.Response
@@ -10,4 +11,5 @@ class MainRepositoryImpl(private val api : Api) : MainRepository {
 
     override suspend fun getProductBasedOnCategory(category: String): Response<Products> =
         api.getProductBasedOnCategory(category)
+
 }
