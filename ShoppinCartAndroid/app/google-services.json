@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "685691679860",
+    "project_id": "shoppincart-3c0f2",
+    "storage_bucket": "shoppincart-3c0f2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:685691679860:android:93ce13e3dde309d8160d21",
+        "android_client_info": {
+          "package_name": "org.yellowhatpro.shoppincart"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "685691679860-hpm2r6rfvlu4ls4turq0494ci21sgcqs.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "org.yellowhatpro.shoppincart",
+            "certificate_hash": "ebd59f5c1e7313ffd6f881cfdcbf5136bbf3e184"
+          }
+        },
+        {
+          "client_id": "685691679860-r29ek62u66imkqutr2abq3pn3c85n99t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBa4Ws94WdmVcGR4L3Qn08HtWYgCKn1uko"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "685691679860-r29ek62u66imkqutr2abq3pn3c85n99t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
