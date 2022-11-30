@@ -24,6 +24,7 @@ import org.yellowhatpro.shoppincart.presentation.ui.components.BottomBar
 import org.yellowhatpro.shoppincart.presentation.theme.ShoppinCartTheme
 import org.yellowhatpro.shoppincart.presentation.ui.components.TopAppBar
 import org.yellowhatpro.shoppincart.presentation.ui.features.auth.AuthScreen
+import org.yellowhatpro.shoppincart.presentation.ui.features.auth.AuthViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @AndroidEntryPoint
@@ -41,9 +42,10 @@ class MainActivity : ComponentActivity() {
             }
 
             val navController = rememberNavController()
+            val authViewModel = hiltViewModel<AuthViewModel>()
             val viewModel = hiltViewModel<ShoppinCartViewModel>()
             if (!authStatus) {
-                AuthScreen(getGoogleLoginAuth(), sharedPreferences, this)
+                AuthScreen(getGoogleLoginAuth(), sharedPreferences, authViewModel, this)
             } else {
                 ShoppinCartTheme {
                     Scaffold(
@@ -58,7 +60,8 @@ class MainActivity : ComponentActivity() {
                         ShoppinCartNavigation(
                             navHostController = navController,
                             viewModel = viewModel,
-                            modifier = Modifier.padding(paddingValues)
+                            modifier = Modifier.padding(paddingValues),
+                            userId = getSharedPreferences("uid", MODE_PRIVATE).getString("uid", "")!!
                         )
                     }
                 }

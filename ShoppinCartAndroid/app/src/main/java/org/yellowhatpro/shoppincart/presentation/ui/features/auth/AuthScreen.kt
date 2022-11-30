@@ -29,7 +29,7 @@ import org.yellowhatpro.shoppincart.presentation.MainActivity
 
 
 @Composable
-fun AuthScreen(getGoogleSignInClient : GoogleSignInClient?, sharedPreferences: SharedPreferences, activity: Activity) {
+fun AuthScreen(getGoogleSignInClient : GoogleSignInClient?, sharedPreferences: SharedPreferences, authViewModel : AuthViewModel, activity: Activity) {
     Log.d("whatisthis",getGoogleSignInClient?.signInIntent.toString())
     val startForResult =
         rememberLauncherForActivityResult(ActivityResultContracts.StartActivityForResult()) { activityResult: ActivityResult ->
@@ -38,7 +38,7 @@ fun AuthScreen(getGoogleSignInClient : GoogleSignInClient?, sharedPreferences: S
                 if (activityResult.data != null) {
                     val task: Task<GoogleSignInAccount> =
                         GoogleSignIn.getSignedInAccountFromIntent(intent)
-                    handleSignInResult(task, sharedPreferences, activity)
+                    handleSignInResult(task, sharedPreferences, activity, authViewModel)
                     Log.d("Login","okay")
                 } else {
                     Log.d("Login","error")
@@ -67,12 +67,13 @@ fun AuthScreen(getGoogleSignInClient : GoogleSignInClient?, sharedPreferences: S
 
 }
 
-fun handleSignInResult(completedTask: Task<GoogleSignInAccount>, sharedPreferences: SharedPreferences, activity: Activity) {
+fun handleSignInResult(completedTask: Task<GoogleSignInAccount>, sharedPreferences: SharedPreferences, activity: Activity, authViewModel: AuthViewModel) {
     try {
         val account = completedTask.getResult(ApiException::class.java)
 
         // Signed in successfully, show authenticated UI.
         updateUI(account, sharedPreferences, activity)
+        authViewModel.addUserToFirebase(account.id.toString())
     } catch (e: ApiException) {
         // The ApiException status code indicates the detailed failure reason.
         // Please refer to the GoogleSignInStatusCodes class reference for more information.

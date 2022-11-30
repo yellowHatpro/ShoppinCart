@@ -17,7 +17,8 @@ import org.yellowhatpro.shoppincart.presentation.ui.features.profile.ProfileScre
 fun ShoppinCartNavigation(
     modifier : Modifier = Modifier,
     navHostController: NavHostController,
-    viewModel: ShoppinCartViewModel
+    viewModel: ShoppinCartViewModel,
+    userId: String
     ) {
     NavHost(
         navController = navHostController,
@@ -27,7 +28,8 @@ fun ShoppinCartNavigation(
             HomeScreen(
                 modifier,
                 viewModel,
-                navHostController
+                navHostController,
+                userId
             )
         }
         composable(route = NavigationItem.Profile.route) {

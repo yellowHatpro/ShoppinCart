@@ -1,5 +1,6 @@
 package org.yellowhatpro.shoppincart.presentation.ui.features.home
 
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -14,6 +15,9 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.Save
+import androidx.compose.material3.Icon
 import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -26,19 +30,25 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import org.yellowhatpro.shoppincart.data.entities.Category.*
 import org.yellowhatpro.shoppincart.data.entities.categories
 import org.yellowhatpro.shoppincart.presentation.ShoppinCartViewModel
 import org.yellowhatpro.shoppincart.presentation.ui.components.NavigationItem
+import org.yellowhatpro.shoppincart.presentation.ui.features.cart.CartViewModel
 
 @Composable
 fun HomeScreen(
     modifier : Modifier,
     viewModel : ShoppinCartViewModel,
-    navHostController: NavHostController
+    navHostController: NavHostController,
+    userId: String
 ) {
+    val cartViewModel = hiltViewModel<CartViewModel>()
+    cartViewModel.getId(userId)
+    Log.d("userId",userId)
     Surface(modifier = modifier.fillMaxSize()) {
         val smartphones by viewModel.smartphones.collectAsState()
         val laptop by viewModel.laptop.collectAsState()
@@ -94,7 +104,9 @@ fun HomeScreen(
                                 image = it?.images?.get(0) ?: "",
                                 name = it?.title ?: "",
                                 cost = it?.price,
-                                navHostController = navHostController
+                                navHostController = navHostController,
+                                cartViewModel = cartViewModel,
+                                userId
                             )
                         }
                     }
@@ -110,16 +122,18 @@ fun ProductItem(
     image: String,
     name: String,
     cost: Int?,
-    navHostController: NavHostController
+    navHostController: NavHostController,
+    cartViewModel : CartViewModel,
+    userId: String
 ) {
     Box(
         modifier = Modifier
             .padding(10.dp)
-            .height(220.dp)
+            .height(240.dp)
             .width(140.dp)
             .clip(RoundedCornerShape(10.dp))
             .clickable {
-                       navHostController.navigate(NavigationItem.Home.route+"/"+id)
+                navHostController.navigate(NavigationItem.Home.route + "/" + id)
             },
     ) {
         Column(
@@ -146,6 +160,9 @@ fun ProductItem(
                 text = "Rs. ${(cost ?: 0)*80}",
                 fontSize = 12.sp
             )
+            Icon(imageVector = Icons.Rounded.Save, contentDescription = "",modifier = Modifier.clickable {
+                cartViewModel.addToCart(id.toString(), userId)
+            })
         }
     }
 }
